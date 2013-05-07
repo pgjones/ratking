@@ -6,31 +6,25 @@
 //////////////////////////
 #include <TFile.h>
 #include <TTree.h>
-#include <TH1F.h>
+#include <TH1D.h>
 #include <TCanvas.h>
 #include <TStyle.h>
 #include <TLegend.h>
 
-using namespace std;
-
 #include <RAT/DS/Root.hh>
 #include <RAT/DS/EV.hh>
 #include <RAT/DS/MC.hh>
-#include <RAT/DS/PMTProperties.hh>
-#include <RAT/DS/MCTrack.hh>
-#include <RAT/DS/MCTrackStep.hh>
-#include <RAT/DS/MCHit.hh>
 
 
-void openAlltheNhits(const char* inFile)
+void openAllTheNhits(const char* inFile)
 {
 
     const int largestBin = 3000;
 
     //define the histograms we want to plot
-    TH1F* evNhits = new TH1F("evNhits", "evNhits", (int) largestBin/20, 0, largestBin);
-    TH1F* MCPMThits = new TH1F("MCPPMThits", "MCPMThits", (int) largestBin/20, 0, largestBin);
-    TH1F* MCPECount = new TH1F("MCPECount", "MCPECount", (int) largestBin/20, 0, largestBin);
+    TH1D* evNhits = new TH1D("evNhits", "evNhits", (int) largestBin/20, 0, largestBin);
+    TH1D* MCPMThits = new TH1D("MCPPMThits", "MCPMThits", (int) largestBin/20, 0, largestBin);
+    TH1D* MCPECount = new TH1D("MCPECount", "MCPECount", (int) largestBin/20, 0, largestBin);
 
     //open the root file and set the branch address to DS
     TFile *dataFile = new TFile(inFile);

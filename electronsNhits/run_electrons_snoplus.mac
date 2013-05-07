@@ -1,14 +1,8 @@
-#//////////////////////////////////////////////////////////////////
-# Last svn revision: $Id$ 
-#//////////////////////////////////////////////////////////////////
-#/**
-#*       Example Macro for simulating electrons in SNO+
-#*       
-#*       run_electrons_snoplus.mac
-#*       Date:           01/12/2008
-#*       contact:        J. Wilson, Oxford
-#*/
-
+##############################################
+#  example macro for simulating electrons
+# in the scintillator volume
+#
+##############################################
 # Don't care about hadrons or muons so quicker not to initialise these processes
 /glg4debug/glg4param omit_muon_processes  1.0
 /glg4debug/glg4param omit_hadronic_processes  1.0
@@ -38,6 +32,6 @@
 # Rate of 1 per second
 /generator/rate/set 1
 
-# generate 100 events
+# generate 500 events
 /rat/run/start 500
 exit

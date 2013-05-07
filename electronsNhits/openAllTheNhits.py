@@ -25,12 +25,12 @@ MCPMThits.SetLineWidth(2)
 MCPECount.SetLineWidth(2)
 
 #Set the line color
-evNhits.SetLineColor(1)
-MCPMThits.SetLineColor(2)
-MCPECount.SetLineColor(4)
+evNhits.SetLineColor(ROOT.kBlack)
+MCPMThits.SetLineColor(ROOT.kRed)
+MCPECount.SetLineColor(ROOT.kBlue)
 
 #set the axis titles
-evNhits.SetXTitle("Number of Nhits, MCPMThits, PE, etc.")
+evNhits.SetXTitle("Number of Nhits, MCPMThits, or MCPEs")
 evNhits.SetYTitle("Number of Events")
 
 #get rid of the title and stats box
