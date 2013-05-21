@@ -1,0 +1,39 @@
+# Do not care about these processes 
+/glg4debug/glg4param omit_muon_processes 1.0
+/glg4debug/glg4param omit_hadronic_processes 1.0
+
+# Water filled detector 
+/rat/db/set DETECTOR geo_file "geo/snoplus.geo"
+/rat/db/set GEO[scint] material "lightwater_sno"
+
+/run/initialize
+
+# Turns off photon production 
+/glg4scint/off
+/process/inactivate Cerenkov
+
+# Trajectory of particles  
+/tracking/storeTrajectory 1
+
+# Begin Event Loop 
+/rat/proc count
+/rat/procset update 10
+/rat/proc outroot
+/rat/procset file "snoplus_electrons_5MeV.root"
+
+# Gun Gnerator 
+/generator/add combo gun:point:poisson
+
+# Generates electrons at 10 MeV isotropically  
+/generator/vtx/set e- 0 0 0 10.0 0 0 0
+
+# position (0,0,0) in mm
+/generator/pos/set 0.0 0.0 0.0
+
+# Poisson event rate of 1 Hz
+/generator/rate/set 1
+
+# Generate 100 events 
+/rat/run/start 100
+
+exit
