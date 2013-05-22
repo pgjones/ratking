@@ -1,20 +1,24 @@
-#! /usr/bin/env python
-
+#!/usr/bin/env python
+#
+# plot_nhits.py
+#
+# Plot nhit numbers
+#
+# Author T - //2013 <> : First revision                                                                                                    
+#################################################################################################### 
 import ROOT
 import rat
 import sys
 
 #define the histograms
-evNhits = ROOT.TH1F("evNits", "evNhits", 150, 0, 3000)
-MCPMThits = ROOT.TH1F("MCPMThits", "MCPMThits", 150, 0, 3000)
-MCPECount = ROOT.TH1F("MCPECount", "MCPECount", 150, 0, 3000)
+evNhits = ROOT.TH1D("evNits", "evNhits", 150, 0, 3000)
+MCPMThits = ROOT.TH1D("MCPMThits", "MCPMThits", 150, 0, 3000)
+MCPECount = ROOT.TH1D("MCPECount", "MCPECount", 150, 0, 3000)
 
 #read in the root file, which should be the first argument of the script
-for ds in rat.dsreader(sys.argv[1]):
-
+for ds, run in rat.dsreader(sys.argv[1]):
     for iEV in range(0, ds.GetEVCount()):
-         evNhits.Fill(ds.GetEV(iEV).GetNhits()) #fill Nhits, retriggers included
-
+        evNhits.Fill(ds.GetEV(iEV).GetNhits()) #fill Nhits, retriggers included
     MCPECount.Fill(ds.GetMC().GetNumPE()) #fill the MC photo electron histo
     MCPMThits.Fill(ds.GetMC().GetMCPMTCount()) #fill the MC PMT hits histo
 
@@ -31,7 +35,7 @@ MCPECount.SetLineColor(ROOT.kBlue)
 
 #set the axis titles
 evNhits.SetXTitle("Number of Nhits, MCPMThits, or MCPEs")
-evNhits.SetYTitle("Number of Events")
+evNhits.SetYTitle("Number of Events per 20 nhit bin")
 
 #get rid of the title and stats box
 ROOT.gStyle.SetOptTitle(0)
