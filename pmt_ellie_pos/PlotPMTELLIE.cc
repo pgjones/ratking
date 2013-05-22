@@ -7,9 +7,10 @@
  
 using namespace std;
  
-void PlotPMTPos( const char* inFile ){
+void PlotPMTEllie()
+{
   // Read in the root file
-  RAT::DSReader reader(inFile);
+  RAT::DSReader reader("pmt_ellie_pos.root");
   RAT::DS::PMTProperties* pmtProp=reader.GetRun()->GetPMTProp();
   RAT::DS::ELLIEProperties* ellieProp = reader.GetRun()->GetELLIEProp();
 
@@ -25,23 +26,20 @@ void PlotPMTPos( const char* inFile ){
   // Loop over the PMTs
   for( int ipmt = 0; ipmt < int(pmtProp->GetPMTCount()); ipmt++ ){
     if (pmtProp->GetType(ipmt)==1){
-      pmtPositions->SetPoint(graphPoint++, pmtProp->GetPos(ipmt).x(), pmtProp->GetPos(ipmt).y(), pmtProp->GetPos(ipmt).z());
+      pmtPositions->SetPoint(ipmt, pmtProp->GetPos(ipmt).x(), pmtProp->GetPos(ipmt).y(), pmtProp->GetPos(ipmt).z());
     }
   }
 
-  graphPoint = 0;
   for (int itellie=0; itellie<int(ellieProp->GetTELLIECount()); itellie++){
-    telliePositions->SetPoint(graphPoint++, ellieProp->GetTELLIEPos(itellie).x(), ellieProp->GetTELLIEPos(itellie).y(), ellieProp->GetTELLIEPos(itellie).z());
+    telliePositions->SetPoint(itellie, ellieProp->GetTELLIEPos(itellie).x(), ellieProp->GetTELLIEPos(itellie).y(), ellieProp->GetTELLIEPos(itellie).z());
   }
   
-  graphPoint = 0;
   for (int iamellie=0; iamellie<int(ellieProp->GetAMELLIECount()); iamellie++){
-    amelliePositions->SetPoint(graphPoint++, ellieProp->GetAMELLIEPos(iamellie).x(), ellieProp->GetAMELLIEPos(iamellie).y(), ellieProp->GetAMELLIEPos(iamellie).z());
+    amelliePositions->SetPoint(iamellie, ellieProp->GetAMELLIEPos(iamellie).x(), ellieProp->GetAMELLIEPos(iamellie).y(), ellieProp->GetAMELLIEPos(iamellie).z());
   }
   
-  graphPoint = 0;
   for (int ismellie=0; ismellie<int(ellieProp->GetSMELLIECount()); ismellie++){
-    smelliePositions->SetPoint(graphPoint++, ellieProp->GetSMELLIEPos(ismellie).x(), ellieProp->GetSMELLIEPos(ismellie).y(), ellieProp->GetSMELLIEPos(ismellie).z());
+    smelliePositions->SetPoint(ismellie, ellieProp->GetSMELLIEPos(ismellie).x(), ellieProp->GetSMELLIEPos(ismellie).y(), ellieProp->GetSMELLIEPos(ismellie).z());
   }
   
   // Make the plots pretty

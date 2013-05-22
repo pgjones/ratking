@@ -10,10 +10,10 @@
 # We probably need to make at least one event so rat isn't confused
 # BEGIN EVENT LOOP
 /rat/proc prune
-/rat/procset prune "mc"
-/rat/procset prune "ev"
+/rat/procset prune "mc" # Do not need the mc information 
+/rat/procset prune "ev" # or the ev information
 /rat/proclast outroot
-/rat/procset file "geometrydata.root"
+/rat/procset file "pmt_ellie_pos.root"
 # END EVENTLOOP
 
 # Event has to go somewhere

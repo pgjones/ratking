@@ -1,5 +1,4 @@
 #!usr/bin/env python
-
 import ROOT
 import rat
 import sys
@@ -11,10 +10,10 @@ telliePositions = ROOT.TGraph2D()
 amelliePositions = ROOT.TGraph2D()
 smelliePositions = ROOT.TGraph2D()
 
-for ds in rat.dsreader(sys.argv[1]):
+for ds in rat.dsreader("pmt_ellie_pos.root"):
   pmtProp=ds[1].GetPMTProp()
   for pmt in range (0,pmtProp.GetPMTCount()):
-    if (pmtProp.GetType(pmt)==1):    
+    if pmtProp.GetType(pmt) == 1:    
       pmtPositions.SetPoint(pmt, pmtProp.GetPos(pmt).x(), pmtProp.GetPos(pmt).y(), pmtProp.GetPos(pmt).z())
 
   ellieProp=ds[1].GetELLIEProp()
