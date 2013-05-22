@@ -1,4 +1,3 @@
-
 #GENERATE ELECTRONS IN SCINT VOLUME, RUNNING TWO FITTERS WITH DIFFERENT OPTIMISERS
 
 /glg4debug/glg4param omit_muon_processes 1.0
@@ -16,35 +15,33 @@
 /rat/proc count
 /rat/procset update 1
 
-/rat/proc fitter
-/rat/procset method "centroid"
+/rat/proc fitter                         # Seed fitter
+/rat/procset method "centroid"           # Choose centroid, quick and easy also never fails
 
-/rat/proc fitter
+/rat/proc fitter                         # Fitter 'opt1'
 /rat/procset method "simpleLikelihood"
-/rat/procset optimiser "minuit"
+/rat/procset optimiser "minuit"          # Note optimiser
 /rat/procset pdf "et1d"
 /rat/procset seed "centroid"
-/rat/procset name "opt1"
+/rat/procset name "opt1"                 # Note nickname
 
-/rat/proc fitter
+/rat/proc fitter                         # Fitter 'opt2'
 /rat/procset method "simpleLikelihood"
-/rat/procset optimiser "powell"
+/rat/procset optimiser "powell"          # Note optimiser
 /rat/procset pdf "et1d"
 /rat/procset seed "centroid"
-/rat/procset name "opt2"
+/rat/procset name "opt2"                 # Note nickname
 
 
 /rat/proc outroot
-/rat/procset file "optimiser2.root"
+/rat/procset file "fitters.root"
 
 #END EVENT LOOP
+
 /generator/add combo gun:fill
 /generator/vtx/set e- 0 0 0 3.0
-
 /generator/pos/set 0 0 0
 /generator/rate/set 1
-
-#END EVENT LOOP
 
 /rat/run/start 1000
 exit
