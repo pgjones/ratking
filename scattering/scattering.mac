@@ -3,7 +3,6 @@
 /glg4debug/glg4param omit_hadronic_processes 1.0
 
 # Water filled detector 
-/rat/db/set DETECTOR geo_file "geo/snoplus.geo"
 /rat/db/set GEO[scint] material "lightwater_sno"
 
 /run/initialize
@@ -19,21 +18,12 @@
 /rat/proc count
 /rat/procset update 10
 /rat/proc outroot
-/rat/procset file "snoplus_electrons_5MeV.root"
+/rat/procset file "scattering.root"
 
-# Gun Gnerator 
 /generator/add combo gun:point:poisson
-
-# Generates electrons at 10 MeV isotropically  
-/generator/vtx/set e- 0 0 0 10.0 0 0 0
-
-# position (0,0,0) in mm
+/generator/vtx/set e- 0 0 0 10.0 0 0 0 # Generates electrons at 10 MeV isotropically  
 /generator/pos/set 0.0 0.0 0.0
-
-# Poisson event rate of 1 Hz
 /generator/rate/set 1
 
-# Generate 100 events 
 /rat/run/start 100
-
 exit
