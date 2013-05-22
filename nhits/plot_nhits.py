@@ -16,7 +16,7 @@ MCPMThits = ROOT.TH1D("MCPMThits", "MCPMThits", 150, 0, 3000)
 MCPECount = ROOT.TH1D("MCPECount", "MCPECount", 150, 0, 3000)
 
 #read in the root file, which should be the first argument of the script
-for ds, run in rat.dsreader(sys.argv[1]):
+for ds, run in rat.dsreader("nhits.root"):
     for iEV in range(0, ds.GetEVCount()):
         evNhits.Fill(ds.GetEV(iEV).GetNhits()) #fill Nhits, retriggers included
     MCPECount.Fill(ds.GetMC().GetNumPE()) #fill the MC photo electron histo

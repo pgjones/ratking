@@ -17,7 +17,7 @@
 #include <RAT/DSReader.hh>
 
 
-void PlotNhits(const char* inFile)
+void PlotNhits()
 {
   //define the histograms we want to plot
   TH1D* evNhits = new TH1D("evNhits", "evNhits", 150, 0.0, 3000.0);
@@ -25,7 +25,7 @@ void PlotNhits(const char* inFile)
   TH1D* MCPECount = new TH1D("MCPECount", "MCPECount", 150, 0.0, 3000.0);
 
   //open the root file with the DSReader and get the first event
-  RAT::DSReader reader(inFile);
+  RAT::DSReader reader("nhits.root");
   RAT::DS::Root* rds = reader.NextEvent();
   while(rds != NULL)
 	{
